@@ -1,0 +1,16 @@
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <img src="/img/logo.webp" alt="Mittelstaedt, Galaviz &amp; Mylin, Inc." width="198" height="48">
+    </a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="/#about">Who We Are</a></li>
+        <li><a href="/services"{{if eq .OriginalReq.URL.Path "/services"}} aria-current="page"{{end}}>Services</a></li>
+        <li><a href="/contact"{{if eq .OriginalReq.URL.Path "/contact"}} aria-current="page"{{end}}>Contact</a></li>
+      </ul>
+    </nav>
+    <a class="tel" href="tel:+14153628435">(415) 362-8435</a>
+  </div>
+</header>

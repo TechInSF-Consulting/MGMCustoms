@@ -1,0 +1,38 @@
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <h2>MG&amp;M</h2>
+        <address>
+          <span>341 Broadway St, San Francisco, CA 94133</span>
+          <a href="tel:+14153628435">(415) 362-8435</a>
+          <span>Fax (415) 362-7484</span>
+        </address>
+      </div>
+      <div id="resources">
+        <h2>Resources</h2>
+        <h3>Government agencies</h3>
+        <ul>
+          <li><a href="https://www.cbp.gov" rel="noopener">Customs and Border Protection</a></li>
+          <li><a href="https://www.fda.gov" rel="noopener">Food and Drug Administration</a></li>
+          <li><a href="https://www.usda.gov" rel="noopener">U.S. Department of Agriculture</a></li>
+          <li><a href="https://www.fws.gov" rel="noopener">Fish &amp; Wildlife Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legal">© Mittelstaedt, Galaviz &amp; Mylin, Inc. All business conducted in accordance with the NCBFAA <a href="/wp-content/uploads/2014/05/MGM-Terms-and-Conditions-of-Service.pdf">Terms and Conditions</a>. · <button class="linkish" type="button" data-consent-open>Cookie settings</button></p>
+  </div>
+</footer>
+
+<div class="callbar" aria-label="Quick contact">
+  <a class="btn btn-gold" href="tel:+14153628435">Call</a>
+  <a class="btn btn-ghost" href="{{if eq .OriginalReq.URL.Path "/contact"}}#message{{else}}/contact{{end}}">Message</a>
+</div>
+
+<div class="consent" role="region" aria-label="Cookie consent" hidden>
+  <p>We use Google Analytics cookies to see which pages are useful. Nothing loads unless you accept.</p>
+  <div>
+    <button class="btn btn-ink" type="button" data-consent="granted">Accept</button>
+    <button class="btn btn-plain" type="button" data-consent="denied">Decline</button>
+  </div>
+</div>

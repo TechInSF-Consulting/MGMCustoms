@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{include "/_partials/head.html"}}
+<title>Contact MG&amp;M | Customs Broker in San Francisco</title>
+<meta name="description" content="Call (415) 362-8435 or send a message to MG&amp;M, licensed customs brokers and freight forwarders at 341 Broadway St, San Francisco.">
+<link rel="canonical" href="https://mgmcustoms.com/contact">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Contact MG&amp;M">
+<meta property="og:url" content="https://mgmcustoms.com/contact">
+</head>
+<body>
+{{include "/_partials/header.html"}}
+
+<main id="main">
+  <section class="contact" aria-labelledby="contact-h">
+    <div class="wrap grid">
+      <div>
+        <div class="sec-head">
+          <p class="eyebrow">Contact</p>
+          <h1 id="contact-h">Talk to a licensed broker.</h1>
+        </div>
+        <address class="addr">
+          <a class="big" href="tel:+14153628435">(415) 362-8435</a>
+          <span>Fax (415) 362-7484</span>
+          <a href="https://maps.google.com/?q=341+Broadway+St,+San+Francisco,+CA+94133" rel="noopener">341 Broadway St<br>San Francisco, CA 94133</a>
+        </address>
+        <p class="aside"><strong>New client?</strong> We'll need a customs power of attorney, a bond questionnaire and a credit application. Download them under <a href="/services#documents">Documents to Complete</a> on our Services page.</p>
+      </div>
+      <!-- ponytail: placeholder until a form backend is chosen (PLAN.md open question 3) -->
+      <form id="message" data-form="contact" novalidate>
+        <label>Name<input name="name" autocomplete="name" required></label>
+        <label>Email<input name="email" type="email" autocomplete="email" inputmode="email" required></label>
+        <label>Company (optional)<input name="company" autocomplete="organization"></label>
+        <label>How can we help?<textarea name="message" rows="5" required></textarea></label>
+        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button class="btn btn-ink" type="submit">Send message</button>
+        <p class="form-note" role="status">We reply within one business day.</p>
+      </form>
+    </div>
+    <!-- Google Maps Embed API. Key comes from the GOOGLE_MAPS_EMBED_KEY env var (Dokploy); nothing loads from Google until the visitor taps -->
+    <div class="wrap">
+      <div class="map" data-map data-key="{{env "GOOGLE_MAPS_EMBED_KEY"}}" data-q="341 Broadway St, San Francisco, CA 94133">
+        <svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z" fill="#e3b021"/></svg>
+        <p><strong>341 Broadway St</strong><br>San Francisco, CA 94133</p>
+        <div class="cta-row">
+          <button class="btn btn-ink" type="button">Show map</button>
+          <a class="link" href="https://www.google.com/maps/dir/?api=1&amp;destination=341+Broadway+St%2C+San+Francisco%2C+CA+94133" rel="noopener" target="_blank">Get directions<span class="sr"> (opens Google Maps in a new tab)</span></a>
+        </div>
+        <p class="form-note">The map loads from Google Maps when you tap Show map.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+{{include "/_partials/footer.html"}}
+</body>
+</html>
