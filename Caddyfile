@@ -1,0 +1,70 @@
+{
+	admin off
+}
+
+# Plain HTTP on :80. Dokploy's Traefik terminates TLS in front of this.
+:{$PORT:80} {
+	root * {$SITE_ROOT:/srv}
+	encode zstd gzip
+	log
+
+	@www host www.mgmcustoms.com
+	redir @www https://mgmcustoms.com{uri} 308
+
+	# Normalize: no trailing slash, no .html
+	@slash path_regexp slash ^(.+)/$
+	redir @slash {re.slash.1} 308
+	redir /index.html / 308
+	@html path_regexp html ^/(services|contact)\.html$
+	redir @html /{re.html.1} 308
+
+	# Old WordPress URLs -> new homes
+	redir /who-we-are "/#about" 301
+	redir /our-staff "/#team" 301
+	redir /who-we-are/what-we-do "/services#commodities" 301
+	redir /customs-clearance "/services#customs-clearance" 301
+	redir /freight-forwarding "/services#freight-forwarding" 301
+	redir /bonds-and-insurance "/services#bonds-and-insurance" 301
+	redir /resources "/services#documents" 301
+	redir /contact-us /contact 301
+	@news path /news /news/*
+	redir @news / 301
+	@commod path_regexp c ^/commodities/([a-z-]+)$
+	redir @commod "/services#{re.c.1}" 301
+
+	@wp path /feed /feed/* /wp-login.php /wp-admin /wp-admin/* /xmlrpc.php
+	respond @wp 410
+	error /_partials/* 404
+
+	@immutable path /fonts/*
+	header @immutable Cache-Control "public, max-age=31536000, immutable"
+	@static path *.css *.js *.webp *.png *.svg *.doc *.xls *.pdf
+	header @static Cache-Control "public, max-age=86400"
+	header ?Cache-Control "public, max-age=300"
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		Content-Security-Policy "default-src 'self'; script-src 'self' https://*.googletagmanager.com; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com; frame-src https://www.google.com; style-src 'self'; font-src 'self'; form-action 'self'; base-uri 'self'; frame-ancestors 'none'"
+		-Server
+	}
+
+	templates
+	try_files {path} {path}.html
+	file_server
+
+	handle_errors 404 {
+		rewrite * /404.html
+		templates
+		file_server
+	}
+	handle_errors {
+		# a template error happens after file_server set these; drop them or the body gets truncated
+		header -Content-Length
+		header -Etag
+		header -Last-Modified
+		header -Accept-Ranges
+		respond "Something went wrong on our end. Please call (415) 362-8435." {err.status_code}
+	}
+}
